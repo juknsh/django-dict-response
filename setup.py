@@ -24,6 +24,7 @@ setup(
         "Programming Language :: Python :: 3.3",
         "Programming Language :: Python :: 3.4",
     ],
+    description='Django Dict Response',
     install_requires=['Django>=1.7'],
     keywords='python django',
     long_description=long_description,
