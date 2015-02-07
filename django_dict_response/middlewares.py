@@ -16,8 +16,7 @@ class DictResponseMiddleware(object):
     def process_response(self, request, response):
         if not isinstance(response, dict):
             return response
-        content_type = response.get('content_type', 'text/html')
-        is_json = content_type == 'application/json'
+        is_json = response.get('content_type', '') == 'application/json'
         keys = json_keys if is_json else render_keys
         headers = {k: v for k, v in response.items() if self.is_header(k)}
         kwargs = {k: v for k, v in response.items() if k in keys}
