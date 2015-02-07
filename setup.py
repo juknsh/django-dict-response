@@ -2,6 +2,9 @@
 # coding: utf-8
 from setuptools import find_packages, setup
 
+with open('README.rst') as f:
+    long_description = f.read()
+
 
 setup(
     author='juknsh',
@@ -21,8 +24,9 @@ setup(
         "Programming Language :: Python :: 3.3",
         "Programming Language :: Python :: 3.4",
     ],
-    install_requires=['django>=1.7'],
+    install_requires=['Django>=1.7'],
     keywords='python django',
+    long_description=long_description,
     name='django-dict-response',
     packages=find_packages(),
     url='https://github.com/juknsh/django-dict-response',
