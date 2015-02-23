@@ -13,6 +13,11 @@ class DictResponseMiddleware(object):
     def is_header(self, key):
         return key[0] in string.ascii_uppercase
 
+    def template_name(request):
+        if request.resolver_match.namespaces:
+            return '/'.join(request.resolver_match.namespaces) + '.html'
+        return request.resolver_match.func.__name__ + '.html'
+
     def process_response(self, request, response):
         if not isinstance(response, dict):
             return response
@@ -25,6 +30,8 @@ class DictResponseMiddleware(object):
         if is_json:
             new_response = JsonResponse(dictionary, **kwargs)
         else:
+            if 'template_name' not in kwargs:
+                kwargs['template_name'] = self.template_name(request)
             new_response = render(request, dictionary=dictionary, **kwargs)
         for k, v in headers.items():
             new_response[k] = v
