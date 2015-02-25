@@ -31,5 +31,5 @@ setup(
     name='django-dict-response',
     packages=find_packages(),
     url='https://github.com/juknsh/django-dict-response',
-    version='0.0.2',
+    version='0.0.3',
 )
