@@ -52,5 +52,5 @@ Configuration
 
 * REDIRECT_KEY
 
-    The setting is used when redirect 
-    default: ``'redirect_to'``
+    | The setting is used when redirect
+    | default: ``'redirect_to'``
