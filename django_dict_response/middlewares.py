@@ -14,7 +14,7 @@ class DictResponseMiddleware(object):
     def is_header(self, key):
         return key[0] in string.ascii_uppercase
 
-    def template_name(request):
+    def template_name(self, request):
         if request.resolver_match.namespaces:
             return '/'.join(request.resolver_match.namespaces) + '.html'
         return request.resolver_match.func.__name__ + '.html'
