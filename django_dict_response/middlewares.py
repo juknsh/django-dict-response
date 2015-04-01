@@ -16,7 +16,8 @@ class DictResponseMiddleware(object):
 
     def template_name(self, request):
         if request.resolver_match.namespaces:
-            return '/'.join(request.resolver_match.namespaces) + '.html'
+            namespaces = '/'.join(request.resolver_match.namespaces)
+            return namespaces + '/' + request.resolver_match.url_name + '.html'
         return request.resolver_match.func.__name__ + '.html'
 
     def process_response(self, request, response):
