@@ -29,7 +29,8 @@ class DictResponseMiddleware(object):
             if not isinstance(redirect_to, (list, tuple)):
                 redirect_to = [redirect_to]
             return redirect(*redirect_to)
-        is_json = response.get('content_type', '') == 'application/json'
+        content_type = response.pop('content_type', None)
+        is_json = content_type == 'application/json'
         keys = json_keys if is_json else render_keys
         headers = {k: v for k, v in response.items() if self.is_header(k)}
         kwargs = {k: v for k, v in response.items() if k in keys}
@@ -40,7 +41,8 @@ class DictResponseMiddleware(object):
         else:
             if 'template_name' not in kwargs:
                 kwargs['template_name'] = self.template_name(request)
-            new_response = render(request, dictionary=dictionary, **kwargs)
+            new_response = render(request, dictionary=dictionary,
+                                  content_type=content_type, **kwargs)
         for k, v in headers.items():
             new_response[k] = v
         return new_response
